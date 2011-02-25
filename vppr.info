@@ -1,4 +1,3 @@
-; $Id$
 name = Vocabulary Permissions Per Role
 description = "Allow adding to/editing terms of/removing terms from vocabularies per role."
 core = 6.x
