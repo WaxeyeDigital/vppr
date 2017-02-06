@@ -1,0 +1,11 @@
+name: Vocabulary Permissions Per Role
+type: module
+description: "Allow adding to/editing terms of/removing terms from vocabularies per role."
+dependencies:
+  - taxonomy
+package: Vocabulary Permissions Per Role
+version: '8.x-0.x-dev'
+core: '8.x'
+project: 'vppr'
+datestamp: 1454074708
+
