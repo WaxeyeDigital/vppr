@@ -5,14 +5,19 @@ namespace Drupal\vppr\Routing;
 use Drupal\Core\Routing\RouteSubscriberBase;
 use Symfony\Component\Routing\RouteCollection;
 
+/**
+ * Class RouteSubscriber.
+ *
+ * @package Drupal\vppr\Routing
+ */
 class RouteSubscriber extends RouteSubscriberBase {
 
   /**
    * {@inheritdoc}
    */
   public function alterRoutes(RouteCollection $collection) {
-    //For all the necessary admin routes grant permission.
-    // admin/structure/taxonomy
+    // For all the necessary admin routes grant permission
+    // (admin/structure/taxonomy).
     if ($route = $collection->get('entity.taxonomy_vocabulary.collection')) {
       $route->setRequirements(array(
         '_custom_access' => '\vppr_route_access',
@@ -20,7 +25,8 @@ class RouteSubscriber extends RouteSubscriberBase {
       $route->setOption('op', 'index');
     }
 
-    // /admin/structure/taxonomy/manage/{taxonomy_vocabulary}/overview
+    // Overview page.
+    // admin/structure/taxonomy/manage/{taxonomy_vocabulary}/overview.
     if ($route = $collection->get('entity.taxonomy_vocabulary.overview_form')) {
       $route->setRequirements(array(
         '_custom_access' => '\vppr_route_access',
@@ -28,22 +34,15 @@ class RouteSubscriber extends RouteSubscriberBase {
       $route->setOption('op', 'list terms');
     }
 
-
-    // admin/structure/taxonomy/manage/{taxonomy_vocabulary}/add
-    if ($route = $collection->get('entity.taxonomy_vocabulary.overview_form')) {
-      $route->setRequirements(array(
-        '_custom_access' => '\vppr_route_access',
-      ));
-    }
-
-    // admin/structure/taxonomy/manage/{taxonomy_vocabulary}
+    // Vocabulary Edit form -
+    // admin/structure/taxonomy/manage/{taxonomy_vocabulary}.
     if ($route = $collection->get('entity.taxonomy_vocabulary.edit_form')) {
       $route->setRequirements(array(
         '_custom_access' => '\vppr_route_access',
       ));
     }
 
-    // taxonomy/term/{taxonomy_term}/edit
+    // Term Edit page - taxonomy/term/{taxonomy_term}/edit.
     if ($route = $collection->get('entity.taxonomy_term.edit_form')) {
       $route->setRequirements(array(
         '_custom_access' => '\vppr_route_access',
@@ -56,13 +55,13 @@ class RouteSubscriber extends RouteSubscriberBase {
       ));
     }
 
-    // admin/structure/taxonomy/%vocabulary/delete
+    // Vocabulary delete - admin/structure/taxonomy/%vocabulary/delete.
     if ($route = $collection->get('entity.taxonomy_vocabulary.delete_form')) {
       $route->setRequirements(array(
         '_custom_access' => '\vppr_route_access',
       ));
     }
-    // taxonomy/term/{taxonomy_term}/delete
+    // Term delete - taxonomy/term/{taxonomy_term}/delete.
     if ($route = $collection->get('entity.taxonomy_term.delete_form')) {
       $route->setRequirements(array(
         '_custom_access' => '\vppr_route_access',
@@ -76,5 +75,5 @@ class RouteSubscriber extends RouteSubscriberBase {
     }
     $route->setOption('op', '');
   }
-}
 
+}

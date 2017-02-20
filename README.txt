@@ -1,16 +1,49 @@
-Place downloaded and custom modules that extend your site functionality beyond
-Drupal core in this directory to ensure clean separation from core modules and
-to facilitate safe, self-contained code updates. Contributed modules from the
-Drupal community may be downloaded at http://drupal.org/project/modules.
+CONTENTS OF THIS FILE
+---------------------
 
-It is safe to organize modules into subdirectories, such as "contrib" for
-contributed modules, and "custom" for custom modules. Note that if you move a
-module to a subdirectory after it has been enabled, you may need to clear the
-Drupal cache so that it can be found.
+ * Introduction
+ * Requirements
+ * Recommended modules
+ * Installation
+ * Configuration
+ * Troubleshooting
+ * FAQ
+ * Maintainers
 
-In multisite configuration, modules found in this directory are available to
-all sites. Alternatively, the sites/your_site_name/modules directory pattern may
-be used to restrict modules to a specific site instance.
+INTRODUCTION
+------------
 
-Refer to the "Developing for Drupal" section of the README.txt in the Drupal
-root directory for further information on extending Drupal with custom modules.
+Vocabulary Permissions Per Role module allows adding to/editing terms
+of/removing terms from vocabularies per role.
+
+ * For a full description of the module, visit the project page:
+   https://www.drupal.org/project/vppr
+
+ * To submit bug reports and feature suggestions, or to track changes:
+   https://drupal.org/project/issues/vppr
+
+REQUIREMENTS
+------------
+
+This module requires the following modules:
+
+ * Taxonomy
+
+INSTALLATION
+------------
+
+ * Install as you would normally install a contributed Drupal module. See:
+   https://drupal.org/documentation/install/modules-themes/modules-7
+   for further information.
+
+CONFIGURATION
+-------------
+
+ * Login as Administrator and grant permissions for required vocabularies to
+  specific roles.
+
+MAINTAINERS
+-----------
+
+Current Drupal 8 maintainers:
+ * Jyoti Bohra (nehajyoti) - https://www.drupal.org/u/nehajyoti.

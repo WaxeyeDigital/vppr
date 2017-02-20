@@ -1,7 +1,8 @@
 <?php
+
 /**
  * @file
- * Vocabulary Permissions Per Role
+ * Vocabulary Permissions Per Role.
  *
  * Allows adding to/editing terms of/removing terms from vocabularies per role.
  */
@@ -11,7 +12,6 @@ use Symfony\Component\Routing\Route;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Render\Element;
 use Drupal\vppr\VpprPermissions;
 
 /**
@@ -20,8 +20,9 @@ use Drupal\vppr\VpprPermissions;
 function vppr_entity_type_alter(array &$entity_types) {
   $entity_types['taxonomy_vocabulary']->setHandlerClass('list_builder', 'Drupal\vppr\VocabularyListBuilder');
 }
+
 /**
- * Route access callback
+ * Route access callback.
  */
 function vppr_route_access(Route $route, RouteMatchInterface $match, AccountProxyInterface $proxy) {
   $op = $route->getOption('op');
@@ -30,21 +31,22 @@ function vppr_route_access(Route $route, RouteMatchInterface $match, AccountProx
 
   $current_path = \Drupal::service('path.current')->getPath();
   $term_id = explode('/', $current_path)[3];
-  if((!$vocabulary) && is_numeric($term_id)) {
+  if ((!$vocabulary) && is_numeric($term_id)) {
     // Case: Add/Edit/Delete term ids.
     $vocabulary_id = db_select('taxonomy_term_data', 't')
       ->fields('t', array('vid'))
-      ->condition('tid',$term_id)
+      ->condition('tid', $term_id)
       ->execute()->fetchField();
   }
   elseif ($vocabulary && is_string($vocabulary)) {
     $vocabulary = Vocabulary::load($vocabulary);
     $vocabulary_id = $vocabulary->id();
   }
-  elseif(!$vocabulary){
+  elseif (!$vocabulary) {
     // Do nothing when vocab is null.
+    $vocabulary_id = NULL;
   }
-  else{
+  else {
     $vocabulary_id = $vocabulary->id();
   }
 
@@ -67,17 +69,17 @@ function vppr_access($op = NULL, $vocabulary_id = NULL) {
     return TRUE;
   }
 
-  if($op == 'index'){
+  if ($op == 'index') {
     // Vocabulary list page.
     foreach ($perm as $key => $value) {
       // Check permission for each individual vocab so that to display
       // in the list or not.
-      if(Drupal::currentUser()->hasPermission($key)) {
+      if (Drupal::currentUser()->hasPermission($key)) {
         return TRUE;
       }
     }
   }
-  else{
+  else {
     // If option is not set i.e all the other options except vocabulary listing.
     if ($vocabulary_id) {
       if (Drupal::currentUser()->hasPermission('administer ' . $vocabulary_id . ' vocabulary terms')) {
@@ -88,24 +90,3 @@ function vppr_access($op = NULL, $vocabulary_id = NULL) {
 
   return FALSE;
 }
-
-/**
- * VPPR's access callback for taxonomy overview page (main entry point).
- *
- * Grants access to taxonomy overview page even if $user has access to any of
- * the vocabularies.
- */
-function vppr_access_taxonomy() {
-  if (user_access('administer taxonomy')) {
-    return TRUE;
-  }
-  $perms = array_keys(vppr_permission());
-  foreach ($perms as $perm) {
-    if (user_access($perm)) {
-      return TRUE;
-    }
-  }
-  return FALSE;
-}
-
-
