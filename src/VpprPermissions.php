@@ -49,14 +49,14 @@ class VpprPermissions implements ContainerInjectionInterface {
     $names = taxonomy_vocabulary_get_names();
     $vocabularies = Vocabulary::loadMultiple($names);
     foreach ($vocabularies as $vocabulary) {
-      $perms['administer ' . $vocabulary->id() . ' vocabulary terms'] = array(
+      $perms['administer ' . $vocabulary->id() . ' vocabulary terms'] = [
         'title' => t('Administer %name vocabulary terms',
-          array(
+          [
             '%name' => $vocabulary->label(),
             '%vid' => $vocabulary->id(),
-          )
+          ]
         ),
-      );
+      ];
     }
     return $perms;
   }
