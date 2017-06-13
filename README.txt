@@ -42,6 +42,12 @@ CONFIGURATION
  * Login as Administrator and grant permissions for required vocabularies to
   specific roles.
 
+ * You may also need to grant text format permissions ("Basic HTML", "Full
+   HTML" and "Restricted HTML") if you want your users to edit textareas
+   which use these formats. Otherwise, the textareas will be disabled by
+   Drupal and this message will show up: "This field has been disabled
+   because you do not have sufficient permissions to edit it."
+
 MAINTAINERS
 -----------
 
