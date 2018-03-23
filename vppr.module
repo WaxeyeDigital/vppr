@@ -29,8 +29,7 @@ function vppr_route_access(Route $route, RouteMatchInterface $match, AccountProx
 
   $vocabulary = $match->getParameter('taxonomy_vocabulary');
 
-  $current_path = explode('/', \Drupal::service('path.current')->getPath());
-  $term_id = isset($current_path[3]) ? $current_path[3] : NULL;
+  $term_id = $match->getRawParameters()->getDigits('taxonomy_term');
   if ((!$vocabulary) && is_numeric($term_id)) {
     // Case: Add/Edit/Delete term ids.
     $vocabulary_id = \Drupal::database()->select('taxonomy_term_data', 't')
