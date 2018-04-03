@@ -13,6 +13,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\vppr\VpprPermissions;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
  * Implements hook_entity_type_alter().
@@ -88,4 +89,19 @@ function vppr_access($op = NULL, $vocabulary_id = NULL) {
   }
 
   return FALSE;
+}
+
+/**
+ *  Implements hook_entity_access()
+ */
+function vppr_entity_access(EntityInterface $entity) {
+  $entity_type_id = $entity->getEntityTypeId();
+
+  if (($entity_type_id == 'taxonomy_vocabulary'
+      && vppr_access('', $entity->getConfigTarget()))
+    ||$entity_type_id == 'taxonomy_term') {
+    return AccessResult::allowed();
+  }
+
+  return AccessResult::neutral();
 }
