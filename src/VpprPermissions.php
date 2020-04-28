@@ -27,7 +27,7 @@ class VpprPermissions implements ContainerInjectionInterface {
   /**
    * Constructs a new instance.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity manager.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager) {
