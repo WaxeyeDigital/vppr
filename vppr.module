@@ -10,8 +10,10 @@
 use Drupal\taxonomy\Entity\Vocabulary;
 use Symfony\Component\Routing\Route;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Access\AccessResultInterface;
 use Drupal\vppr\VpprPermissions;
 use Drupal\Core\Entity\EntityInterface;
 
@@ -92,16 +94,21 @@ function vppr_access($op = NULL, $vocabulary_id = NULL) {
 }
 
 /**
- *  Implements hook_entity_access()
+ * Implements hook_ENTITY_TYPE_access() for taxonomy_term.
  */
-function vppr_entity_access(EntityInterface $entity) {
-  $entity_type_id = $entity->getEntityTypeId();
-
-  if (($entity_type_id == 'taxonomy_vocabulary'
-      && vppr_access('', $entity->getConfigTarget()))
-    ||$entity_type_id == 'taxonomy_term') {
+function vppr_taxonomy_term_access(EntityInterface $entity, string $operation, AccountInterface $account): AccessResultInterface {
+  if (TRUE === vppr_access($operation, $entity->bundle())) {
     return AccessResult::allowed();
   }
+  return AccessResult::neutral();
+}
 
+/**
+ * Implements hook_ENTITY_TYPE_access() for taxonomy_vocabulary.
+ */
+function vppr_taxonomy_vocabulary_access(EntityInterface $entity, string $operation, AccountInterface $account): AccessResultInterface {
+  if (TRUE === vppr_access($operation, $entity->id())) {
+    return AccessResult::allowed();
+  }
   return AccessResult::neutral();
 }
