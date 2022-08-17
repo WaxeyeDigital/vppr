@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
- * Class VpprPermissions.
+ * Defines a class for permissions based on vppr.
  *
  * @package Drupal\vppr
  */

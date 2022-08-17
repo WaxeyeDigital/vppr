@@ -5,7 +5,7 @@ namespace Drupal\vppr;
 use Drupal\taxonomy\VocabularyListBuilder as VocabularyListBuilderBase;
 
 /**
- * Class VocabularyListBuilder.
+ * Defines a class to build a listing of vppr.
  *
  * @package Drupal\vppr
  */
