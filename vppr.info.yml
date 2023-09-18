@@ -4,5 +4,4 @@ description: "Allow adding to/editing terms of/removing terms from vocabularies 
 dependencies:
   - drupal:taxonomy
 package: Vocabulary Permissions Per Role
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9.3 || ^10
