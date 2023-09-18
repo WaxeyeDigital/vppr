@@ -1,0 +1,17 @@
+{
+  "name": "drupal/vppr",
+  "description": "Vocabulary Permissions Per Role module",
+  "type": "drupal-module",
+  "homepage": "https://drupal.org/project/vppr",
+  "authors": [
+    {
+      "name": "Bohdan Artemchuk (bohart)",
+      "homepage": "https://www.drupal.org/u/bohart",
+      "role": "Maintainer"
+    },
+  ],
+  "support": {
+    "issues": "https://drupal.org/project/issues/vppr"
+  },
+  "minimum-stability": "dev"
+}
