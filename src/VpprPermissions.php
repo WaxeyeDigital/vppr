@@ -46,7 +46,7 @@ class VpprPermissions implements ContainerInjectionInterface {
    */
   public static function permissions() {
     $perms = [];
-    $names = taxonomy_vocabulary_get_names();
+    $names = \Drupal::entityQuery('taxonomy_vocabulary')->execute();
     $vocabularies = Vocabulary::loadMultiple($names);
     foreach ($vocabularies as $vocabulary) {
       $perms['administer ' . $vocabulary->id() . ' vocabulary terms'] = [
